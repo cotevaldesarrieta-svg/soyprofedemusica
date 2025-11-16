@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoyPROFE - Material Musical Pedagógico</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            /* Paleta de colores elegante y confiable */
+            --primary-color: #1e3a5f;      /* Azul oscuro profesional - confianza */
+            --secondary-color: #2d5aa0;    /* Azul medio - profesionalismo */
+            --accent-color: #4a90e2;       /* Azul claro - modernidad y accesibilidad */
+            --highlight-color: #5cb85c;    /* Verde suave - crecimiento y armonía */
+            --text-dark: #2c3e50;          /* Gris oscuro para textos */
+            --text-light: #7f8c8d;         /* Gris medio para textos secundarios */
+            --bg-light: #f8f9fa;           /* Fondo claro */
+            --white: #ffffff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background-color: #000000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .hero-section {
+            background-color: #000000;
+            color: white;
+            padding: 0;
+            margin-bottom: 50px;
+            min-height: calc(100vh - 76px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-logo {
+            width: 100%;
+            max-width: 850px;
+            height: auto;
+            display: block;
+            margin: 0 auto 20px auto;
+            filter: drop-shadow(0 10px 30px rgba(0,0,0,0.3));
+        }
+        
+        .band-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .band-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .band-card img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a2e;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .free-badge {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        /* Botones elegantes y modernos */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 15px rgba(45, 90, 160, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--secondary-color) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 90, 160, 0.4);
+            color: white;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(45, 90, 160, 0.3);
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 10px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+        
+        /* Mejoras en las tarjetas */
+        .card {
+            border: none;
+            background-color: rgba(10, 20, 35, 0.9);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .card:hover {
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .card-body {
+            color: white;
+        }
+        
+        .card-body p {
+            color: white;
+        }
+        
+        .card-body strong {
+            color: white;
+        }
+        
+        .card-body h4 {
+            color: white;
+        }
+        
+        /* Alert mejorado */
+        .alert-info {
+            background: rgba(10, 20, 35, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 4px solid rgba(255, 255, 255, 0.4);
+            color: white;
+        }
+        
+        /* Textos en la sección de contenido */
+        .text-muted {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
+        
+        #bandas h2,
+        #bandas p {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-music-note-beamed"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="bandas.html">Bandas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#metodos">Métodos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="#login">
+                            <i class="bi bi-person-circle"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <img src="images/logo.png" alt="Logo" class="hero-logo">
+            <h1 class="display-5 fw-bold mb-3">Material Musical Pedagógico de Calidad</h1>
+            <p class="lead mb-0">Descarga backing tracks, pistas aisladas y material educativo para profesores de música</p>
+        </div>
+    </section>
+
+    <!-- Sección de Bandas -->
+    <section id="bandas" class="container mb-5">
+        <div class="row">
+            <div class="col-lg-10 mx-auto">
+                <div class="card shadow-sm border-0 p-4 p-md-5">
+                    <div class="card-body">
+                        <p class="lead mb-4">
+                            Hola! <strong>SOY PROFE DE MUSICA</strong> en conjunto con <strong>Remoto Music Studio</strong> es un imaginario pedagógico sin fines de lucro creado con el fin de facilitar un contenido de calidad para <strong>PROFESORES, ESTUDIANTES, INSTRUMENTISTAS, SONIDISTAS Y/O AMANTES DE LA MÚSICA</strong>.
+                        </p>
+                        
+                        <p class="mb-4">
+                            Encontrarás <strong>3 modalidades</strong> organizadas para facilitar el uso del material dependiendo de tus necesidades!
+                        </p>
+                        
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3 text-center"><strong>BACKINGTRACKS:</strong></h4>
+                            <p>
+                                Esta sección está dirigida para instrumentistas. Encontrarás mezclas sin el instrumento que necesites para poder practicar tus canciones favoritas de una manera rápida y directa!
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3 text-center"><strong>NON FILTERED ISOLATED TRACKS:</strong></h4>
+                            <p>
+                                Esta sección está dirigida para aquellas personas que deseen hacer sus propias mezclas o deseen adentrarse en el mundo del sonido ya que cada canción está separada por instrumentos y no ha tenido ninguna intervención, es decir, cada track está en bruto. Esta sección es perfecta para <strong>PROFES DE SONIDO, SONIDISTAS o ESTUDIANTES DE SONIDO</strong>.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3 text-center"><strong>ISOLATED FOR TEACHERS:</strong></h4>
+                            <p>
+                                Esta sección está dirigida especialmente para <strong>PROFESORES</strong> ya que todos los tracks están aislados y previamente mejorados para ser utilizados de forma inmediata. Ideal para estudiar frases, recursos técnicos o sonoros de tu instrumento. Simplemente pon play y cautiva a tus alumnos de una manera sencilla y rápida.
+                            </p>
+                        </div>
+                        
+                        <div class="alert alert-info mt-4 mb-4">
+                            <p class="mb-2">
+                                Sinceramente esperamos que este material te sea de utilidad y que sigas adelante en este camino tan difícil pero hermoso y necesario. <strong>NO DESISTAS!!</strong> Nosotros creemos en ti! Utiliza este material de manera responsable y ayúdanos a difundir a más personas para que esta comunidad pueda llegar más allá de los confines del espacio sideral!
+                            </p>
+                        </div>
+                        
+                        <p class="mb-0">
+                            Puedes seguirnos en <strong>INSTAGRAM, TIKTOK, FACEBOOK Y YOUTUBE</strong> (en donde además podrás encontrar los backingtracks completos para que los utilices solo con un click!). No lo olvides! <strong>@REMOTOMUSICSTUDIO</strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>SoyPROFE</h5>
+                    <p class="text-muted">Material musical pedagógico de calidad para profesores y estudiantes de música.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Términos y Condiciones</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contacto</h5>
+                    <p class="text-muted">
+                        <i class="bi bi-envelope"></i> contacto@soyprofe.com<br>
+                        <i class="bi bi-telephone"></i> +1 (555) 123-4567
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="text-center text-muted">
+                <p>&copy; 2024 SoyPROFE. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

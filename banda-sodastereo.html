@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SODA STEREO - SoyPROFE</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            /* Paleta de colores elegante y confiable */
+            --primary-color: #1e3a5f;      /* Azul oscuro profesional - confianza */
+            --secondary-color: #2d5aa0;    /* Azul medio - profesionalismo */
+            --accent-color: #4a90e2;       /* Azul claro - modernidad y accesibilidad */
+            --highlight-color: #5cb85c;    /* Verde suave - crecimiento y armonía */
+            --text-dark: #2c3e50;          /* Gris oscuro para textos */
+            --text-light: #7f8c8d;         /* Gris medio para textos secundarios */
+            --bg-light: #f8f9fa;           /* Fondo claro */
+            --white: #ffffff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background-color: #000000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .hero-section {
+            background-color: #000000;
+            color: white;
+            padding: 0;
+            margin-bottom: 50px;
+            min-height: calc(100vh - 76px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-start;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 20px 20px 40px 20px;
+        }
+        
+        .banda-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .banda-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+        .banda-title-wrapper .btn-back {
+            margin-right: 20px;
+        }
+        
+        .banda-title-wrapper .banda-title {
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        /* Botón de volver */
+        .btn-back {
+            background-color: rgba(10, 20, 35, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .btn-back:hover {
+            background-color: rgba(10, 20, 35, 0.95);
+            border-color: rgba(74, 144, 226, 0.5);
+            transform: translateX(-3px);
+            box-shadow: 0 6px 20px rgba(45, 90, 160, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .btn-back i {
+            font-size: 1.2rem;
+        }
+        
+        .banda-title {
+            text-align: center;
+        }
+        
+        /* Lista tipo tabla para canciones */
+        .canciones-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .canciones-table-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .cancion-item {
+            background-color: rgba(10, 20, 35, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 18px 25px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .cancion-item:hover {
+            background-color: rgba(10, 20, 35, 0.95);
+            border-color: rgba(74, 144, 226, 0.4);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(45, 90, 160, 0.25);
+        }
+        
+        .cancion-item:hover .cancion-arrow-table {
+            color: var(--accent-color);
+            transform: translateX(3px);
+        }
+        
+        .cancion-name-table {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cancion-name-table i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+        
+        .cancion-arrow-table {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.3rem;
+            transition: all 0.25s ease;
+        }
+        
+        @media (max-width: 992px) {
+            .canciones-table-wrapper {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .canciones-table-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 10px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+        
+        /* Breadcrumbs */
+        .breadcrumb-section {
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .breadcrumb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .breadcrumb {
+            background-color: rgba(10, 20, 35, 0.5);
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+        }
+        
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: ">";
+            color: rgba(255, 255, 255, 0.5);
+            padding: 0 10px;
+            font-weight: 600;
+        }
+        
+        .breadcrumb-item a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .breadcrumb-item.active {
+            color: white;
+            font-weight: 600;
+        }
+        
+        /* Animación de carga sutil */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .loading-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        
+        /* Animación de carga para items de canción */
+        .cancion-item.loading {
+            position: relative;
+            pointer-events: none;
+        }
+        
+        .cancion-item.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 25px;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        
+        .cancion-item.loading .cancion-name-table,
+        .cancion-item.loading .cancion-arrow-table {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-music-note-beamed"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="bandas.html">Bandas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#metodos">Métodos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="#login">
+                            <i class="bi bi-person-circle"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Breadcrumb Section -->
+    <section class="breadcrumb-section">
+        <div class="breadcrumb-container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+                    <li class="breadcrumb-item"><a href="bandas-espanol.html">Bandas</a></li>
+                    <li class="breadcrumb-item active">Soda Stereo</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="banda-title-wrapper">
+                <a href="bandas-espanol.html" class="btn-back">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+                <h1 class="banda-title">SODA STEREO</h1>
+            </div>
+            <div class="canciones-container">
+                <div class="canciones-table-wrapper">
+                    <div class="cancion-item" onclick="window.location.href='cancion-cuando-pase-el-temblor.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> CUANDO PASE EL TEMBLOR</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-de-musica-ligera.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> DE MÚSICA LIGERA</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-dietetico.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> DIETÉTICO</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-ella-uso-mi-cabeza-como-un-revolver.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> ELLA USÓ MI CABEZA COMO UN REVÓLVER</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-en-la-ciudad-de-la-furia.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> EN LA CIUDAD DE LA FURIA</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-juegos-de-seduccion.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> JUEGOS DE SEDUCCION</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-persiana-americana.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> PERSIANA AMERICANA</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-profugos.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> PROFUGOS</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-tratame-suavemente.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> TRÁTAME SUAVEMENTE</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                    <div class="cancion-item" onclick="window.location.href='cancion-zoom.html'">
+                        <span class="cancion-name-table"><i class="bi bi-music-note-beamed"></i> ZOOM</span>
+                        <i class="bi bi-chevron-right cancion-arrow-table"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>SoyPROFE</h5>
+                    <p class="text-muted">Material musical pedagógico de calidad para profesores y estudiantes de música.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Términos y Condiciones</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contacto</h5>
+                    <p class="text-muted">
+                        <i class="bi bi-envelope"></i> contacto@soyprofe.com<br>
+                        <i class="bi bi-telephone"></i> +1 (555) 123-4567
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="text-center text-muted">
+                <p>&copy; 2024 SoyPROFE. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para animación de carga -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            const cancionItems = document.querySelectorAll('.cancion-item');
+            
+            // Mostrar loader al hacer clic en items de canción
+            cancionItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    this.classList.add('loading');
+                    
+                    setTimeout(() => {
+                        if (loadingOverlay) {
+                            loadingOverlay.classList.add('show');
+                        }
+                    }, 200);
+                });
+            });
+            
+            // Ocultar loader cuando la página se carga completamente
+            window.addEventListener('load', function() {
+                if (loadingOverlay) {
+                    loadingOverlay.classList.remove('show');
+                }
+                cancionItems.forEach(item => {
+                    item.classList.remove('loading');
+                });
+            });
+            
+            // Mostrar loader al navegar entre páginas internas
+            const internalLinks = document.querySelectorAll('a:not([target="_blank"]):not([href^="#"]):not([href^="http"])');
+            internalLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    if (!this.closest('.breadcrumb') && !this.closest('.navbar')) {
+                        if (loadingOverlay) {
+                            loadingOverlay.classList.add('show');
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Ocultar loader cuando la página está lista
+        if (document.readyState === 'complete') {
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            if (loadingOverlay) {
+                loadingOverlay.classList.remove('show');
+            }
+        }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bandas en Español - SoyPROFE</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            /* Paleta de colores elegante y confiable */
+            --primary-color: #1e3a5f;      /* Azul oscuro profesional - confianza */
+            --secondary-color: #2d5aa0;    /* Azul medio - profesionalismo */
+            --accent-color: #4a90e2;       /* Azul claro - modernidad y accesibilidad */
+            --highlight-color: #5cb85c;    /* Verde suave - crecimiento y armonía */
+            --text-dark: #2c3e50;          /* Gris oscuro para textos */
+            --text-light: #7f8c8d;         /* Gris medio para textos secundarios */
+            --bg-light: #f8f9fa;           /* Fondo claro */
+            --white: #ffffff;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 50%, var(--accent-color) 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-dark);
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background-color: #000000;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.5);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .hero-section {
+            background-color: #000000;
+            color: white;
+            padding: 0;
+            margin-bottom: 50px;
+            min-height: calc(100vh - 76px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-section .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            padding: 80px 20px 40px 20px;
+        }
+        
+        /* Botones elegantes y modernos */
+        .btn-primary {
+            background-color: rgba(10, 20, 35, 0.9);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 15px 40px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+            margin: 10px;
+            min-width: 250px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover,
+        .btn-primary:focus,
+        .btn-primary:active {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(45, 90, 160, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(45, 90, 160, 0.3);
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            border-radius: 8px;
+            padding: 10px 28px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-outline-light:hover {
+            background-color: white;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+        
+        /* Lista tipo tabla para bandas */
+        .bandas-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        
+        .bandas-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 8px;
+        }
+        
+        .bandas-table tbody tr {
+            background-color: rgba(10, 20, 35, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+        
+        .bandas-table tbody tr:hover {
+            background-color: rgba(10, 20, 35, 0.95);
+            border-color: rgba(74, 144, 226, 0.4);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(45, 90, 160, 0.25);
+        }
+        
+        .bandas-table tbody td {
+            padding: 18px 25px;
+            color: white;
+            border: none;
+        }
+        
+        .bandas-table tbody td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+        
+        .bandas-table tbody td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            text-align: right;
+        }
+        
+        .banda-name-table {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.3px;
+        }
+        
+        .banda-arrow-table {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.3rem;
+            transition: all 0.25s ease;
+        }
+        
+        .bandas-table tbody tr:hover .banda-arrow-table {
+            color: var(--accent-color);
+            transform: translateX(3px);
+        }
+        
+        .bandas-table a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            color: white;
+            text-align: center;
+        }
+        
+        .section-title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+            width: 100%;
+        }
+        
+        .section-title-wrapper .btn-back {
+            margin-right: 20px;
+        }
+        
+        .section-title-wrapper .section-title {
+            margin: 0;
+            line-height: 1.2;
+        }
+        
+        /* Botón de volver */
+        .btn-back {
+            background-color: rgba(10, 20, 35, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 10px 12px;
+            font-weight: 600;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+        }
+        
+        .btn-back:hover {
+            background-color: rgba(10, 20, 35, 0.95);
+            border-color: rgba(74, 144, 226, 0.5);
+            transform: translateX(-3px);
+            box-shadow: 0 6px 20px rgba(45, 90, 160, 0.4);
+            color: white;
+            text-decoration: none;
+        }
+        
+        .btn-back i {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-music-note-beamed"></i>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="bandas.html">Bandas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#metodos">Métodos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contacto">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-light ms-2" href="#login">
+                            <i class="bi bi-person-circle"></i> Iniciar Sesión
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="section-title-wrapper">
+                <a href="bandas.html" class="btn-back">
+                    <i class="bi bi-arrow-left"></i>
+                </a>
+                <h1 class="section-title">BANDAS EN ESPAÑOL</h1>
+            </div>
+            <div class="bandas-container">
+                <table class="bandas-table">
+                    <tbody>
+                        <tr onclick="window.location.href='banda-31minutos.html'">
+                            <td>
+                                <span class="banda-name-table">31 MINUTOS</span>
+                            </td>
+                            <td>
+                                <i class="bi bi-chevron-right banda-arrow-table"></i>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location.href='banda-losprisioneros.html'">
+                            <td>
+                                <span class="banda-name-table">LOS PRISIONEROS</span>
+                            </td>
+                            <td>
+                                <i class="bi bi-chevron-right banda-arrow-table"></i>
+                            </td>
+                        </tr>
+                        <tr onclick="window.location.href='banda-sodastereo.html'">
+                            <td>
+                                <span class="banda-name-table">SODA STEREO</span>
+                            </td>
+                            <td>
+                                <i class="bi bi-chevron-right banda-arrow-table"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>SoyPROFE</h5>
+                    <p class="text-muted">Material musical pedagógico de calidad para profesores y estudiantes de música.</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Enlaces</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white-50 text-decoration-none">Sobre Nosotros</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Términos y Condiciones</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contacto</h5>
+                    <p class="text-muted">
+                        <i class="bi bi-envelope"></i> contacto@soyprofe.com<br>
+                        <i class="bi bi-telephone"></i> +1 (555) 123-4567
+                    </p>
+                </div>
+            </div>
+            <hr class="bg-white">
+            <div class="text-center text-muted">
+                <p>&copy; 2024 SoyPROFE. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+

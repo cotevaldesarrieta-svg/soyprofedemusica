@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Descarga - SoyPROFE</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
+    <!-- Estilos personalizados -->
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --highlight-color: #e94560;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .download-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 60px 0;
+            margin-bottom: 40px;
+        }
+        
+        .download-option {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid transparent;
+            height: 100%;
+        }
+        
+        .download-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-color: var(--highlight-color);
+        }
+        
+        .download-option.premium {
+            border: 3px solid #ffd700;
+            background: linear-gradient(135deg, #fffef0 0%, #ffffff 100%);
+        }
+        
+        .download-icon {
+            font-size: 3rem;
+            color: var(--highlight-color);
+            margin-bottom: 20px;
+        }
+        
+        .btn-download {
+            background: linear-gradient(135deg, var(--highlight-color) 0%, #c73650 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 40px;
+            font-weight: 600;
+            color: white;
+            width: 100%;
+        }
+        
+        .btn-download:hover {
+            background: linear-gradient(135deg, #c73650 0%, var(--highlight-color) 100%);
+            transform: scale(1.05);
+        }
+        
+        .btn-download:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .premium-badge {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #1a1a2e;
+            font-weight: bold;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        
+        .ad-placeholder {
+            background: #e9ecef;
+            border: 2px dashed #adb5bd;
+            border-radius: 10px;
+            padding: 40px;
+            text-align: center;
+            color: #6c757d;
+            margin: 20px 0;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-music-note-beamed"></i> SoyPROFE
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#bandas">Bandas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html#premium">Premium</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="download-header">
+        <div class="container">
+            <div class="d-flex align-items-center mb-3">
+                <a href="javascript:history.back()" class="text-white text-decoration-none me-3">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </a>
+                <div>
+                    <h1 class="display-5 fw-bold mb-2" id="cancion-nombre">Cargando...</h1>
+                    <p class="lead mb-0" id="banda-nombre">Selecciona una opción de descarga</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opciones de Descarga -->
+    <section class="container mb-5">
+        <div class="row g-4">
+            <!-- Opción 1: Backing Tracks -->
+            <div class="col-md-4">
+                <div class="download-option">
+                    <div class="text-center">
+                        <i class="bi bi-headphones download-icon"></i>
+                        <h3 class="fw-bold mb-3">BACKING TRACKS</h3>
+                        <p class="text-muted mb-4">
+                            Pistas de acompañamiento sin la voz principal. Perfectas para practicar y tocar en vivo.
+                        </p>
+                        <ul class="list-unstyled text-start mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Calidad profesional</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Múltiples formatos</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Sin publicidad (Premium)</li>
+                        </ul>
+                        <button class="btn btn-download" onclick="descargar('backing')">
+                            <i class="bi bi-download"></i> Descargar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opción 2: Isolated for Teachers -->
+            <div class="col-md-4">
+                <div class="download-option">
+                    <div class="text-center">
+                        <i class="bi bi-music-player download-icon"></i>
+                        <h3 class="fw-bold mb-3">ISOLATED FOR TEACHERS</h3>
+                        <p class="text-muted mb-4">
+                            Pistas aisladas de instrumentos específicos. Ideal para análisis y enseñanza musical.
+                        </p>
+                        <ul class="list-unstyled text-start mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Instrumentos separados</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Material educativo</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Sin publicidad (Premium)</li>
+                        </ul>
+                        <button class="btn btn-download" onclick="descargar('isolated')">
+                            <i class="bi bi-download"></i> Descargar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Opción 3: Non Filtered Isolated Tracks -->
+            <div class="col-md-4">
+                <div class="download-option premium">
+                    <div class="text-center">
+                        <span class="premium-badge"><i class="bi bi-star-fill"></i> PREMIUM</span>
+                        <i class="bi bi-sliders download-icon"></i>
+                        <h3 class="fw-bold mb-3">NON FILTERED ISOLATED TRACKS</h3>
+                        <p class="text-muted mb-4">
+                            Pistas aisladas sin procesamiento. La versión más pura y profesional para análisis avanzado.
+                        </p>
+                        <ul class="list-unstyled text-start mb-4">
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Sin filtros ni procesamiento</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Calidad de estudio</li>
+                            <li class="mb-2"><i class="bi bi-check-circle-fill text-success"></i> Solo Premium</li>
+                        </ul>
+                        <button class="btn btn-download" onclick="descargar('non-filtered')" id="btn-non-filtered">
+                            <i class="bi bi-download"></i> Descargar (Premium)
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Área de Publicidad (solo para usuarios gratuitos) -->
+        <div id="ad-section" class="mt-5">
+            <div class="ad-placeholder">
+                <i class="bi bi-megaphone fs-1 mb-3"></i>
+                <h5>Publicidad</h5>
+                <p class="mb-0">Los usuarios gratuitos verán publicidad aquí antes de descargar</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2024 SoyPROFE. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Simulación de datos (luego se conectará a una base de datos)
+        const cancionesData = {
+            101: { nombre: "Hey Jude", banda: "The Beatles" },
+            102: { nombre: "Let It Be", banda: "The Beatles" },
+            103: { nombre: "Yesterday", banda: "The Beatles" },
+            201: { nombre: "Stairway to Heaven", banda: "Led Zeppelin" },
+            301: { nombre: "Comfortably Numb", banda: "Pink Floyd" },
+            401: { nombre: "Bohemian Rhapsody", banda: "Queen" }
+        };
+
+        // Obtener información de la URL
+        function getInfo() {
+            const params = new URLSearchParams(window.location.search);
+            const bandaId = params.get('banda');
+            const cancionId = parseInt(params.get('cancion'));
+            
+            const cancion = cancionesData[cancionId];
+            if (cancion) {
+                document.getElementById('cancion-nombre').textContent = cancion.nombre;
+                document.getElementById('banda-nombre').textContent = cancion.banda;
+            }
+            
+            return { bandaId, cancionId, cancion };
+        }
+
+        // Simulación de usuario (luego se conectará a autenticación)
+        const esUsuarioPremium = false; // Cambiar a true para probar funcionalidad premium
+
+        // Función de descarga
+        function descargar(tipo) {
+            const { cancionId, cancion } = getInfo();
+            
+            // Verificar si es premium para "Non Filtered"
+            if (tipo === 'non-filtered' && !esUsuarioPremium) {
+                alert('Esta opción está disponible solo para usuarios Premium. ¡Suscríbete ahora!');
+                window.location.href = 'index.html#premium';
+                return;
+            }
+
+            // Mostrar publicidad si no es premium
+            if (!esUsuarioPremium && tipo !== 'non-filtered') {
+                const mostrarAd = confirm('Como usuario gratuito, verás publicidad antes de descargar. ¿Continuar?');
+                if (!mostrarAd) return;
+                
+                // Simular publicidad (aquí iría el código real de publicidad)
+                setTimeout(() => {
+                    iniciarDescarga(tipo, cancionId, cancion);
+                }, 2000);
+            } else {
+                iniciarDescarga(tipo, cancionId, cancion);
+            }
+        }
+
+        function iniciarDescarga(tipo, cancionId, cancion) {
+            // Aquí iría la lógica real de descarga
+            alert(`Iniciando descarga de:\n\nCanción: ${cancion.nombre}\nTipo: ${tipo.toUpperCase()}\n\n(En producción, aquí se descargaría el archivo real)`);
+            
+            // Simulación: redirigir a un enlace de descarga
+            // window.location.href = `/api/descargar?cancion=${cancionId}&tipo=${tipo}`;
+        }
+
+        // Deshabilitar botón premium si no es usuario premium
+        if (!esUsuarioPremium) {
+            document.getElementById('btn-non-filtered').disabled = true;
+            document.getElementById('btn-non-filtered').innerHTML = '<i class="bi bi-lock"></i> Requiere Premium';
+        }
+
+        // Cargar información al iniciar
+        document.addEventListener('DOMContentLoaded', getInfo);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
